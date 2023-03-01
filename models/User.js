@@ -21,9 +21,13 @@ const User = new Schema({
         type: String,
         required: true
     },
-    Gesehene_Kennzeichen:{
-        type: Array
-    },
+    Gesehene_Kennzeichen: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "kennzeichen", //ref collectionName
+            default: []
+        }
+    ],
     Highscore:{
         type: Number
     }

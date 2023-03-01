@@ -11,7 +11,7 @@ router.route("/kennzeichen").get(getAllKennzeichen);
 
 router.route("/kennzeichen/:kz").get(getSingleKennzeichen);
 
-router.route("/bundesland/:bl").get(getBundesland);     //wieso geht das nicht mit /kennzeichen/ davor?
+router.route("/kennzeichen/bundesland/:bl").get(getBundesland);     //wieso geht das nicht mit /kennzeichen/ davor?
 
 
 module.exports = router;

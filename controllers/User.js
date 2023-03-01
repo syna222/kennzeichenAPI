@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
 const getSingleUser = async (req, res) => {
     const { id } = req.params;
     try{
-        const user = await User.findById(id);
+        const user = await User.findById(id).populate('Gesehene_Kennzeichen');
         res.status(200).json(user);
     }
     catch(err){
@@ -59,11 +59,27 @@ const deleteSingleUser = async (req, res) => {
     }
 }
 
+const addKennzeichenToUser = async (req, res) => {
+    //userid:
+    const {id} = req.params;
+    //KennzeichenId:
+    const {kennzeichenId} = req.body;
+
+    console.log(req.body)
+    try{
+        const updatedUser = await User.findByIdAndUpdate(id, {$push: {Gesehene_Kennzeichen: kennzeichenId}}, {new: true}).exec();
+        res.status(200).json(updatedUser);
+    }
+    catch(err){
+        res.status(404).send(err.message);
+    }
+}
+
 
 module.exports = {
     getAllUsers,
     createUser,
     getSingleUser,
     updateSingleUser,
-    deleteSingleUser
+    deleteSingleUser, addKennzeichenToUser
 }
