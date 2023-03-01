@@ -7,11 +7,11 @@ const {
 }            = require("../controllers/Kennzeichen");
 
 
-router.route("/").get(getAllKennzeichen);
+router.route("/kennzeichen").get(getAllKennzeichen);
 
-router.route("/:kz").get(getSingleKennzeichen);
+router.route("/kennzeichen/:kz").get(getSingleKennzeichen);
 
-router.route("/bundesland/:bl").get(getBundesland);
+router.route("/bundesland/:bl").get(getBundesland);     //wieso geht das nicht mit /kennzeichen/ davor?
 
 
 module.exports = router;

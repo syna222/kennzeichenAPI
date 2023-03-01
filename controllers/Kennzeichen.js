@@ -25,8 +25,8 @@ const getAllKennzeichen = async (req, res) => {
     const { sortbu } = req.query;       //query a la "?sortbu=true"
     try{
         const kennzeichen = await Kennzeichen.find();
-        console.log("test aus getAllKennzeichen(), sortkfz ist:", sortkfz);
-        console.log("test aus getAllKennzeichen(), sortbu ist:", sortbu);
+        //console.log("test aus getAllKennzeichen(), sortkfz ist:", sortkfz);
+        //console.log("test aus getAllKennzeichen(), sortbu ist:", sortbu);
         //OPT 1: sort alphabetically if sortkfz==="true":
         if(sortkfz==="true"){
             //console.log("sortkfz is string true");
