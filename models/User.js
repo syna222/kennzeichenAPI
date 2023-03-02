@@ -24,7 +24,7 @@ const User = new Schema({
     Gesehene_Kennzeichen: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "kennzeichen", //ref collectionName
+            ref: "kennzeichen", //references collectionName
             default: []
         }
     ],

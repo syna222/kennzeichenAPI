@@ -61,13 +61,12 @@ const deleteSingleUser = async (req, res) => {
 
 const addKennzeichenToUser = async (req, res) => {
     //userid:
-    const {id} = req.params;
+    const { id } = req.params;
     //KennzeichenId:
-    const {kennzeichenId} = req.body;
-
-    console.log(req.body)
+    const { kennzeichenId } = req.body;   //destrukt. Schreibweise für x = req.body.kennzeichenId (deshalb muss feld so heißen in put request)
+    //console.log(req.body)
     try{
-        const updatedUser = await User.findByIdAndUpdate(id, {$push: {Gesehene_Kennzeichen: kennzeichenId}}, {new: true}).exec();
+        const updatedUser = await User.findByIdAndUpdate(id, {$addToSet: {Gesehene_Kennzeichen: kennzeichenId}}, {new: true}).exec(); //$addToSet instead of $push prevents duplicates!
         res.status(200).json(updatedUser);
     }
     catch(err){
@@ -75,11 +74,27 @@ const addKennzeichenToUser = async (req, res) => {
     }
 }
 
+const removeKennzeichenFromUser = async (req, res) => {
+    //userid:
+    const { id } = req.params;
+    //KennzeichenId:
+    const { kennzeichenId } = req.body;  //destrukt. Schreibweise für x = req.body.kennzeichenId (deshalb muss feld so heißen in put request)
+    try{
+        const updatedUser = await User.findByIdAndUpdate(id, {$pull: {Gesehene_Kennzeichen: kennzeichenId}}, {new: true}).exec();
+        res.status(200).json(updatedUser);
+    }
+    catch(err){
+        res.status(404).send(err.message);
+    }
+
+}
 
 module.exports = {
     getAllUsers,
     createUser,
     getSingleUser,
     updateSingleUser,
-    deleteSingleUser, addKennzeichenToUser
+    deleteSingleUser, 
+    addKennzeichenToUser,
+    removeKennzeichenFromUser
 }

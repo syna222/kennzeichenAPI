@@ -5,7 +5,9 @@ const {
     createUser,
     getSingleUser,
     updateSingleUser,
-    deleteSingleUser, addKennzeichenToUser
+    deleteSingleUser, 
+    addKennzeichenToUser,
+    removeKennzeichenFromUser
 }           = require("../controllers/User");
 
 
@@ -13,6 +15,8 @@ router.route("/users").get(getAllUsers).post(createUser);
 
 router.route("/users/:id").get(getSingleUser).put(updateSingleUser).delete(deleteSingleUser);
 
-router.route('/users/:id/addkennzeichen').put(addKennzeichenToUser)
+router.route('/users/:id/addkennzeichen').put(addKennzeichenToUser);
+
+router.route('/users/:id/removekennzeichen').put(removeKennzeichenFromUser);
 
 module.exports = router;
