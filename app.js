@@ -7,6 +7,7 @@ const cors = require("cors");
 //routes anfordern:
 const kzRouter = require("./routes/Kennzeichen");
 const userRouter = require("./routes/User");
+const authRouter = require("./routes/auth");
 
 //database:
 const db = require("./db/db");
@@ -22,7 +23,7 @@ app.use(express.json());
 app.use(cors());
 
 //routes anwenden:
- app.use("/", kzRouter, userRouter);
+ app.use("/", kzRouter, userRouter, authRouter);
 
 app.get("/", (req, res) => res.send('hola'))   //nicht Daten auf Initialroute zurückgeben!!
 

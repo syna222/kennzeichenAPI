@@ -10,8 +10,10 @@ const {
     removeKennzeichenFromUser
 }           = require("../controllers/User");
 
+ const auth = require('../middlewares/auth')
 
-router.route("/users").get(getAllUsers).post(createUser);
+
+router.route("/users").get(auth, getAllUsers).post(createUser);
 
 router.route("/users/:id").get(getSingleUser).put(updateSingleUser).delete(deleteSingleUser);
 
