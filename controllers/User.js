@@ -10,7 +10,7 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-const createUser = async (req, res) => {
+const createUser = async (req, res) => {        //hier noch middleware, ob email schon existiert in db
     const { Vorname, Nachname, Email, Passwort } = req.body;
     try{
         const newUser = await User.create({Vorname, Nachname, Email, Passwort});

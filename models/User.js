@@ -5,11 +5,7 @@ const { Schema } = mongoose;
 
 //Neue Schema-Instanz erstellen:
 const User = new Schema({
-    Vorname:{
-        type: String,
-        required: true
-    },
-    Nachname:{
+    Username:{
         type: String,
         required: true
     },
