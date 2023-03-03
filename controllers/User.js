@@ -10,10 +10,19 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-const createUser = async (req, res) => {        //hier noch middleware, ob email schon existiert in db
-    const { Vorname, Nachname, Email, Passwort } = req.body;
+const createUser = async (req, res) => {        //hier noch middleware, ob email schon existiert in db und alle felder erfüllt?
+    const { Username, Email, Passwort } = req.body;
+    //if required fields are empty:
+    if(!Username || !Email || !Passwort){
+        return res.status(400).send("All fields are required");
+    }
+    //if user w/ email already exist:
+    const [existingUser] = await User.find({Email: Email});
+    if(existingUser){
+       return res.status(400).send("There already is a user with this email.");
+    }
     try{
-        const newUser = await User.create({Vorname, Nachname, Email, Passwort});
+        const newUser = await User.create({Username, Email, Passwort});
         res.status(201).json(newUser);
     }
     catch(err){
