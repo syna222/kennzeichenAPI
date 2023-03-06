@@ -2,7 +2,6 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
-
     const { Email, Passwort } = req.body;
     try{
         const [user] = await User.find({ Email: Email, Passwort: Passwort}).populate('Gesehene_Kennzeichen');

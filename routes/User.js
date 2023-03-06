@@ -13,9 +13,9 @@ const {
  const auth = require('../middlewares/auth')
 
 
-router.route("/users").get(auth, getAllUsers).post(createUser);
+router.route("/users").get(getAllUsers).post(createUser);       //auth, 
 
-router.route("/users/:id").get(getSingleUser).put(updateSingleUser).delete(deleteSingleUser);
+router.route("/users/:id").get(getSingleUser).put(updateSingleUser).delete(deleteSingleUser); //auth, 
 
 router.route('/users/:id/addkennzeichen').put(addKennzeichenToUser);
 
