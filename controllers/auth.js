@@ -10,7 +10,7 @@ const login = async (req, res) => {
             console.log("user found");
             const token = jwt.sign({ _id: user.id }, process.env.JWT_SECRET);
             console.log("token", token);
-            return res.status(200).send(token);
+            return res.status(200).send({token, user});
         } else{
             return res.status(404).send("User nicht gefunden.");
         }
