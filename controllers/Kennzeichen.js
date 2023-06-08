@@ -25,30 +25,20 @@ const getAllKennzeichen = async (req, res) => {
     const { sortbu } = req.query;       //query a la "?sortbu=true"
     try{
         const kennzeichen = await Kennzeichen.find();
-        //console.log("test aus getAllKennzeichen(), sortkfz ist:", sortkfz);
-        //console.log("test aus getAllKennzeichen(), sortbu ist:", sortbu);
         //OPT 1: sort alphabetically if sortkfz==="true":
         if(sortkfz==="true"){
-            //console.log("sortkfz is string true");
             kennzeichen.sort(compareAlphab);
         }
         //OPT 2: sort by bundesland if sortbu==="true":
         if(sortbu==="true"){
-            //console.log("sortbu is string true");
             kennzeichen.sort(compareBL);
         }
-
         res.status(200).json(kennzeichen);
     }
     catch(err){
         console.log(err.message);
     }
 }
-
-
-
-
-
 
 const getSingleKennzeichen = async (req, res) => {
     const { kz } = req.params;

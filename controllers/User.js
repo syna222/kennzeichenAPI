@@ -10,7 +10,7 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-const createUser = async (req, res) => {        //hier noch middleware, ob email schon existiert in db und alle felder erfüllt?
+const createUser = async (req, res) => {
     const { Username, Email, Passwort } = req.body;
     //if required fields are empty:
     if(!Username || !Email || !Passwort){
@@ -69,11 +69,8 @@ const deleteSingleUser = async (req, res) => {
 }
 
 const addKennzeichenToUser = async (req, res) => {
-    //userid:
     const { id } = req.params;
-    //KennzeichenId:
     const { kennzeichenId } = req.body;   //destrukt. Schreibweise für x = req.body.kennzeichenId (deshalb muss feld so heißen in put request)
-    //console.log(req.body)
     try{
         const updatedUser = await User.findByIdAndUpdate(id, {$addToSet: {Gesehene_Kennzeichen: kennzeichenId}}, {new: true}).exec(); //$addToSet instead of $push prevents duplicates!
         res.status(200).json(updatedUser);
@@ -84,9 +81,7 @@ const addKennzeichenToUser = async (req, res) => {
 }
 
 const removeKennzeichenFromUser = async (req, res) => {
-    //userid:
     const { id } = req.params;
-    //KennzeichenId:
     const { kennzeichenId } = req.body;  //destrukt. Schreibweise für x = req.body.kennzeichenId (deshalb muss feld so heißen in put request)
     try{
         const updatedUser = await User.findByIdAndUpdate(id, {$pull: {Gesehene_Kennzeichen: kennzeichenId}}, {new: true}).exec();
@@ -95,7 +90,6 @@ const removeKennzeichenFromUser = async (req, res) => {
     catch(err){
         res.status(404).send(err.message);
     }
-
 }
 
 module.exports = {

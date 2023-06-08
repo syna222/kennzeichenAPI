@@ -14,12 +14,9 @@ const login = async (req, res) => {
         } else{
             return res.status(404).send("User nicht gefunden.");
         }
-
     }catch(err){
         res.status(404).send(err.message);
     }
-
-
 }
 
 module.exports =  {login};
